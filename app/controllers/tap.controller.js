@@ -39,6 +39,9 @@ exports.findAll = (req, res) => {
     Tap.find()
         .then(taps => {
 
+            res.set('Access-Control-Allow-Origin', '*')
+            res.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+            
             res.send({
                 "items": taps,
                 "_links": {
@@ -144,6 +147,10 @@ exports.findOne = (req, res) => {
                     message: "Tap not found with id " + req.params.tapId
                 });
             }
+
+            res.set('Access-Control-Allow-Origin', '*')
+            res.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+
             res.status(200).send(tap);
         }).catch(err => {
             if (err.kind === 'ObjectId') {
